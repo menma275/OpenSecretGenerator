@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Secret Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Open Secret Generator</h1>
+        <div class="connected-icon">
+            <div class="circle"></div>
+            <p>Connected</p>
+        </div>
+    </header>
+    <main>
+        <div id="input_interface">
+            <textarea rows="5" id="secret-text" placeholder="Enter your secret here"></textarea>
+            <div id="interface">
+                <div id="interface-slider">
+                    <div class="slider">
+                        <label for="slider_ts">Text Size</label>
+                        <input type="range" id="slider_ts" min="1" max="100" value="50">
+                    </div>
+                    <div class="slider">
+                        <label for="slider_ol">Out Line</label>
+                        <input type="range" id="slider_ol" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_bokeh">Bokeh</label>
+                        <input type="range" id="slider_bokeh" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_px">Position X</label>
+                        <input type="range" id="slider_px" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_py">Position Y</label>
+                        <input type="range" id="slider_py" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_bs">Box Size</label>
+                        <input type="range" id="slider_bs" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_dxr">Distortion X : Range</label>
+                        <input type="range" id="slider_dxr" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_dxf">Distortion X : Frequency</label>
+                        <input type="range" id="slider_dxf" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_dyr">Distortion Y : Range</label>
+                        <input type="range" id="slider_dyr" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_dyf">Distortion Y : Frequency</label>
+                        <input type="range" id="slider_dyf" min="1" max="100" value="50">
+                    </div><div class="slider">
+                        <label for="slider_rotation">Rotation</label>
+                        <input type="range" id="slider_rotation" min="1" max="100" value="50">
+                    </div>
+                </div>
+                <div id="interface-radio">
+                    <div class="radio">
+                        <input type="radio" id="vh_v" name="vh" value="vertical" checked>
+                        <label for="vh_v">Vertical</label>
+                        <input type="radio" id="vh_h" name="vh" value="horizontal">
+                        <label for="vh_h">Horizontal</label>
+                    </div><div class="radio">
+                        <input type="radio" id="m_d" name="mirror" value="default" checked>
+                        <label for="m_d">Default</label>
+                        <input type="radio" id="m_m" name="mirror" value="mirror">
+                        <label for="m_m">Mirror</label>
+                    </div><div class="radio">
+                        <input type="radio" id="sf_sans" name="select_font" value="sansserif" checked>
+                        <label for="sf_sans">Sans-serif</label>
+                        <input type="radio" id="sf_serif" name="select_font" value="serif">
+                        <label for="sf_serif">Serif</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="result-part">
+            <div id="myCanvas"></div>
+            <button class="button">Download</button>
+        </div>
+    </main>
+    <script src="p5.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
