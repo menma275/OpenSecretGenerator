@@ -96,7 +96,6 @@
     <script src="sketch.js"></script>
     <script>
         document.getElementById('download-button').addEventListener('click', () => {
-            alert("Downloaded");
             const canvasDataUrl = document.getElementById("defaultCanvas0").toDataURL('image/png');
             const link = document.createElement('a');
             link.download = 'os.png';

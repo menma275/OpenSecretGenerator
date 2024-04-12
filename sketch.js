@@ -85,88 +85,88 @@ let fs = `
 
 // MIDI ----------------------------------------------- start
 
-function getIsMidiReady() {
-  return isMidiReady;
-}
+// function getIsMidiReady() {
+//   return isMidiReady;
+// }
 
-function onMIDISuccess(midiAccess) {
-  console.log("MIDI ready!");
-  const input = midiAccess.inputs.values().next();
-  console.log(input.value.manufacturer);
-  console.log(input.value.name);
-  isMidiReady = true;
-  input.value.onmidimessage = onMIDIMessage;
-}
+// function onMIDISuccess(midiAccess) {
+//   console.log("MIDI ready!");
+//   const input = midiAccess.inputs.values().next();
+//   console.log(input.value.manufacturer);
+//   console.log(input.value.name);
+//   isMidiReady = true;
+//   input.value.onmidimessage = onMIDIMessage;
+// }
 
-function onMIDIFailure(msg) {
-  isMidiReady = false;
-  console.log("Failed to get MIDI access - " + msg);
-}
+// function onMIDIFailure(msg) {
+//   isMidiReady = false;
+//   console.log("Failed to get MIDI access - " + msg);
+// }
 
-function onMIDIMessage(message) {
-  const data = message.data;
-  console.log("MIDI data: ", data);
+// function onMIDIMessage(message) {
+//   const data = message.data;
+//   console.log("MIDI data: ", data);
 
-  if (!isOffsetFt) rectColor = "#fff";
+//   if (!isOffsetFt) rectColor = "#fff";
 
-  switch (data[1]) {
-    case 2:
-      ts = map(data[2], 0, 176, 1, 4) * bts;
-      break;
-    case 3:
-      sw = map(data[2], 0, 176, 0, ts);
-      break;
-    case 4:
-      bokeh = map(data[2], 0, 176, 0, minW / 10);
-      break;
-    case 5:
-      warpXH = map(data[2], 0, 176, 0, 0.1);
-      break;
-    case 6:
-      warpYH = map(data[2], 0, 176, 0, 0.1);
-      break;
-    case 8:
-      offset = map(data[2], 0, 127, 0, width / 3);
-      break;
-    case 13:
-      tX = map(data[2], 0, 127, 0, minW);
-      break;
-    case 14:
-      tY = map(data[2], 0, 127, 0, minW);
-      break;
-    case 15:
-      angle = map(data[2], 0, 127, 0, PI * 2);
-      break;
-    case 16:
-      warpXW = map(data[2], 0, 127, 0, 50);
-      break;
-    case 17:
-      warpYW = map(data[2], 0, 127, 0, 50);
-      break;
-    case 18:
-      offsetX = map(data[2], 0, 127, 0, minW);
-      rectColor = "#eee";
-      isOffsetFt = false;
-      break;
-    case 19:
-      offsetY = map(data[2], 0, 127, 0, minW);
-      rectColor = "#eee";
-      isOffsetFt = false;
-      break;
-    case 62:
-      isVertical = data[2] === 0 ? false : true;
-      break;
-    case 63:
-      isReverse = data[2] === 0 ? false : true;
-      break;
-    case 80:
-      isMirror = data[2] === 0 ? false : true;
-      break;
-    case 81:
-      isSerif = data[2] === 0 ? false : true;
-      break;
-  }
-}
+//   switch (data[1]) {
+//     case 2:
+//       ts = map(data[2], 0, 176, 1, 4) * bts;
+//       break;
+//     case 3:
+//       sw = map(data[2], 0, 176, 0, ts);
+//       break;
+//     case 4:
+//       bokeh = map(data[2], 0, 176, 0, minW / 10);
+//       break;
+//     case 5:
+//       warpXH = map(data[2], 0, 176, 0, 0.1);
+//       break;
+//     case 6:
+//       warpYH = map(data[2], 0, 176, 0, 0.1);
+//       break;
+//     case 8:
+//       offset = map(data[2], 0, 127, 0, width / 3);
+//       break;
+//     case 13:
+//       tX = map(data[2], 0, 127, 0, minW);
+//       break;
+//     case 14:
+//       tY = map(data[2], 0, 127, 0, minW);
+//       break;
+//     case 15:
+//       angle = map(data[2], 0, 127, 0, PI * 2);
+//       break;
+//     case 16:
+//       warpXW = map(data[2], 0, 127, 0, 50);
+//       break;
+//     case 17:
+//       warpYW = map(data[2], 0, 127, 0, 50);
+//       break;
+//     case 18:
+//       offsetX = map(data[2], 0, 127, 0, minW);
+//       rectColor = "#eee";
+//       isOffsetFt = false;
+//       break;
+//     case 19:
+//       offsetY = map(data[2], 0, 127, 0, minW);
+//       rectColor = "#eee";
+//       isOffsetFt = false;
+//       break;
+//     case 62:
+//       isVertical = data[2] === 0 ? false : true;
+//       break;
+//     case 63:
+//       isReverse = data[2] === 0 ? false : true;
+//       break;
+//     case 80:
+//       isMirror = data[2] === 0 ? false : true;
+//       break;
+//     case 81:
+//       isSerif = data[2] === 0 ? false : true;
+//       break;
+//   }
+// }
 
 // MIDI ----------------------------------------------- end
 
@@ -227,7 +227,7 @@ function setup() {
 
   frameRate(30);
 
-  navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+  // navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 }
 
 function windowResized() {
