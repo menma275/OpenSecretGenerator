@@ -28,7 +28,7 @@
                 <div id="interface-slider">
                     <div class="slider">
                         <label for="slider_ts">Text Size</label>
-                        <input type="range" id="slider_ts" min="0" max="100" value="1">
+                        <input type="range" id="slider_ts" min="0" max="100" value="0">
                     </div>
                     <div class="slider">
                         <label for="slider_ol">Out Line</label>
@@ -95,13 +95,63 @@
     </main>
     <script src="p5.js"></script>
     <script src="sketch.js"></script>
-    <script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyAyj1dMvwLTzR3b0PY1Dx8Ofw7GJC8cRQM",
+            authDomain: "osgenerator.firebaseapp.com",
+            projectId: "osgenerator",
+            storageBucket: "osgenerator.appspot.com",
+            messagingSenderId: "236391066525",
+            appId: "1:236391066525:web:d5808f99d3b31968691d74"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        function saveJsonToFirebase(formData) {
+            const database = getDatabase(app);
+            const dbRef = ref(database, 'formData'); // 'formData' というパスに参照を作成
+
+            // データをオブジェクトとして保存
+            const newFormDataRef = push(dbRef); // 'formData' パスに新しい子ノードをプッシュ
+            set(newFormDataRef, formData) // データを新しい子ノードにセット
+                .then(() => {
+                    console.log("Data saved successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error saving data:", error);
+                });
+        }
+
         document.getElementById('download-button').addEventListener('click', () => {
             const canvasDataUrl = document.getElementById("defaultCanvas0").toDataURL('image/png');
             const link = document.createElement('a');
             link.download = 'os.png';
             link.href = canvasDataUrl;
             link.click();
+
+            const form = document.getElementById('interface');
+            const formValue = {};
+            for (let i = 0; i < form.elements.length; i++) {
+                const element = form.elements[i];
+                // resetは除く
+                if (element.type === 'radio') {
+                    if (element.checked) {
+                        formValue[element.name] = element.value;
+                    }
+                } else if(element.type === 'reset') {
+                    continue;
+                } else if (element.type === 'range') {
+                    formValue[element.id] = Number(element.value);
+                }
+            }
+            const json = JSON.stringify(formValue);
+            // console.log(json);
+            console.log(formValue);
+            saveJsonToFirebase(formValue);
         });
     </script>
 </body>
