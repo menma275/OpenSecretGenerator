@@ -148,6 +148,8 @@
                     formValue[element.id] = Number(element.value);
                 }
             }
+            formValue['secret-text'] = document.getElementById('secret-text').value;
+
             const json = JSON.stringify(formValue);
             // console.log(json);
             console.log(formValue);
