@@ -24,7 +24,7 @@
     <main>
         <div id="input_interface">
             <textarea rows="5" id="secret-text" placeholder="Enter your secret here"></textarea>
-            <div id="interface">
+            <form id="interface">
                 <div id="interface-slider">
                     <div class="slider">
                         <label for="slider_ts">Text Size</label>
@@ -85,7 +85,8 @@
                         <label for="sf_serif">Serif</label>
                     </div>
                 </div>
-            </div>
+                <input type="reset" value="Reset">
+            </form>
         </div>
         <div id="result-part">
             <div id="myCanvas"></div>

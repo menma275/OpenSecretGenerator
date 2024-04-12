@@ -120,6 +120,18 @@ main{
 
 }
 
+input[type="reset"]{
+    cursor: pointer;
+    width: fit-s;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    color: var(--accent);
+    font-weight: bold;
+    background-color: var(--accent-light);
+    margin: 0 0 0 auto;
+}
+
 .radio{
     padding: 5px 10px;
     border-radius: 5px;
