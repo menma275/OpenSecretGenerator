@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP&family=Space+Grotesk:wght@300..700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -28,51 +28,56 @@
                 <div id="interface-slider">
                     <div class="slider">
                         <label for="slider_ts">Text Size</label>
-                        <input type="range" id="slider_ts" min="1" max="100" value="50">
+                        <input type="range" id="slider_ts" min="0" max="100" value="1">
                     </div>
                     <div class="slider">
                         <label for="slider_ol">Out Line</label>
-                        <input type="range" id="slider_ol" min="1" max="100" value="50">
+                        <input type="range" id="slider_ol" min="0" max="100" value="0">
                     </div><div class="slider">
                         <label for="slider_bokeh">Bokeh</label>
-                        <input type="range" id="slider_bokeh" min="1" max="100" value="50">
+                        <input type="range" id="slider_bokeh" min="0" max="100" value="0">
                     </div><div class="slider">
                         <label for="slider_px">Position X</label>
-                        <input type="range" id="slider_px" min="1" max="100" value="50">
+                        <input type="range" id="slider_px" min="0" max="100" value="50">
                     </div><div class="slider">
                         <label for="slider_py">Position Y</label>
-                        <input type="range" id="slider_py" min="1" max="100" value="50">
+                        <input type="range" id="slider_py" min="0" max="100" value="50">
                     </div><div class="slider">
-                        <label for="slider_bs">Box Size</label>
-                        <input type="range" id="slider_bs" min="1" max="100" value="50">
+                        <label for="slider_offset">Offset</label>
+                        <input type="range" id="slider_offset" min="0" max="100" value="0">
                     </div><div class="slider">
                         <label for="slider_dxr">Distortion X : Range</label>
-                        <input type="range" id="slider_dxr" min="1" max="100" value="50">
+                        <input type="range" id="slider_dxr" min="0" max="100" value="0">
                     </div><div class="slider">
                         <label for="slider_dxf">Distortion X : Frequency</label>
-                        <input type="range" id="slider_dxf" min="1" max="100" value="50">
+                        <input type="range" id="slider_dxf" min="0" max="100" value="100">
                     </div><div class="slider">
                         <label for="slider_dyr">Distortion Y : Range</label>
-                        <input type="range" id="slider_dyr" min="1" max="100" value="50">
+                        <input type="range" id="slider_dyr" min="0" max="100" value="0">
                     </div><div class="slider">
                         <label for="slider_dyf">Distortion Y : Frequency</label>
-                        <input type="range" id="slider_dyf" min="1" max="100" value="50">
+                        <input type="range" id="slider_dyf" min="0" max="100" value="100">
                     </div><div class="slider">
                         <label for="slider_rotation">Rotation</label>
-                        <input type="range" id="slider_rotation" min="1" max="100" value="50">
+                        <input type="range" id="slider_rotation" min="0" max="100" value="0">
                     </div>
                 </div>
                 <div id="interface-radio">
                     <div class="radio">
-                        <input type="radio" id="vh_v" name="vh" value="vertical" checked>
+                        <input type="radio" id="vh_v" name="vh" value="vertical" >
                         <label for="vh_v">Vertical</label>
-                        <input type="radio" id="vh_h" name="vh" value="horizontal">
+                        <input type="radio" id="vh_h" name="vh" value="horizontal" checked>
                         <label for="vh_h">Horizontal</label>
                     </div><div class="radio">
                         <input type="radio" id="m_d" name="mirror" value="default" checked>
                         <label for="m_d">Default</label>
                         <input type="radio" id="m_m" name="mirror" value="mirror">
                         <label for="m_m">Mirror</label>
+                    </div><div class="radio">
+                        <input type="radio" id="r_d" name="reverce" value="default" checked>
+                        <label for="r_d">Default</label>
+                        <input type="radio" id="r_r" name="reverce" value="reverce">
+                        <label for="r_r">Reverce</label>
                     </div><div class="radio">
                         <input type="radio" id="sf_sans" name="select_font" value="sansserif" checked>
                         <label for="sf_sans">Sans-serif</label>
@@ -84,10 +89,20 @@
         </div>
         <div id="result-part">
             <div id="myCanvas"></div>
-            <button class="button">Download</button>
+            <button class="button" id="download-button">Download</button>
         </div>
     </main>
     <script src="p5.js"></script>
     <script src="sketch.js"></script>
+    <script>
+        document.getElementById('download-button').addEventListener('click', () => {
+            alert("Downloaded");
+            const canvasDataUrl = document.getElementById("defaultCanvas0").toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'os.png';
+            link.href = canvasDataUrl;
+            link.click();
+        });
+    </script>
 </body>
 </html>

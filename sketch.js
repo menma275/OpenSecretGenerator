@@ -1,17 +1,18 @@
-let minW = 500;
+let minW;
 let mc;
 
-let canvasElement = document.getElementById("myCanvas");
+let canvasElement;
 
 let canvas;
 
-let mainText = "今日のお昼ご飯はクリームパンです。";
-mainText = "「ちょっとした秘密」を入力してください";
+let mainText = "「ちょっとした秘密」を入力してください";
 
 let mtV = "";
 let mtR = "";
 
 let rectColor = "#eee";
+
+let isMidiReady = false;
 
 // パラメーター
 let bts;
@@ -84,16 +85,21 @@ let fs = `
 
 // MIDI ----------------------------------------------- start
 
+function getIsMidiReady() {
+  return isMidiReady;
+}
+
 function onMIDISuccess(midiAccess) {
   console.log("MIDI ready!");
   const input = midiAccess.inputs.values().next();
   console.log(input.value.manufacturer);
   console.log(input.value.name);
-
+  isMidiReady = true;
   input.value.onmidimessage = onMIDIMessage;
 }
 
 function onMIDIFailure(msg) {
+  isMidiReady = false;
   console.log("Failed to get MIDI access - " + msg);
 }
 
@@ -181,7 +187,8 @@ function reverseOrder(str) {
 }
 
 function setup() {
-  minW = min(canvasElement.offsetWidth, canvasElement.offsetHeight);
+  canvasElement = document.getElementById("myCanvas");
+  minW = canvasElement.offsetWidth;
   canvas = createCanvas(minW, minW, WEBGL);
   canvas.parent(canvasElement);
 
@@ -224,8 +231,9 @@ function setup() {
 }
 
 function windowResized() {
-  minW = min(canvasElement.offsetWidth, canvasElement.offsetHeight);
   canvasElement = document.getElementById("myCanvas");
+  canvas.parent(canvasElement);
+  minW = canvasElement.offsetWidth;
   resizeCanvas(minW, minW, WEBGL);
 }
 
@@ -235,6 +243,42 @@ function draw() {
   if (mainText !== getText.value) {
     mainText = getText.value;
     setup();
+  }
+
+  if (!isMidiReady) {
+    ts = map(document.getElementById("slider_ts").value, 0, 100, 1, 4) * bts;
+    sw = map(document.getElementById("slider_ol").value, 0, 100, 0, ts);
+    bokeh = map(
+      document.getElementById("slider_bokeh").value,
+      0,
+      100,
+      0,
+      minW / 10
+    );
+    tX = map(document.getElementById("slider_px").value, 0, 100, 0, minW);
+    tY = map(document.getElementById("slider_py").value, 0, 100, 0, minW);
+    offset = map(
+      document.getElementById("slider_offset").value,
+      0,
+      100,
+      0,
+      width / 3
+    );
+    warpXH = map(document.getElementById("slider_dxr").value, 0, 100, 0, 0.1);
+    warpXW = map(document.getElementById("slider_dxf").value, 0, 100, 0, 50);
+    warpYH = map(document.getElementById("slider_dyr").value, 0, 100, 0, 0.1);
+    warpYW = map(document.getElementById("slider_dyf").value, 0, 100, 0, 50);
+    angle = map(
+      document.getElementById("slider_rotation").value,
+      0,
+      100,
+      0,
+      PI * 2
+    );
+    isVertical = document.getElementById("vh_v").checked ? true : false;
+    isMirror = document.getElementById("m_d").checked ? false : true;
+    isReverse = document.getElementById("r_d").checked ? false : true;
+    isSerif = document.getElementById("sf_serif").checked ? true : false;
   }
 
   area = width - offset * 2;
