@@ -64,24 +64,24 @@
                 </div>
                 <div id="interface-radio">
                     <div class="radio">
-                        <input type="radio" id="vh_v" name="vh" value="vertical" >
+                        <input type="radio" id="vh_v" name="isVertical" value=true >
                         <label for="vh_v">Vertical</label>
-                        <input type="radio" id="vh_h" name="vh" value="horizontal" checked>
+                        <input type="radio" id="vh_h" name="isVertical" value=false checked>
                         <label for="vh_h">Horizontal</label>
                     </div><div class="radio">
-                        <input type="radio" id="m_d" name="mirror" value="default" checked>
+                        <input type="radio" id="m_d" name="isMirror" value=false checked>
                         <label for="m_d">Default</label>
-                        <input type="radio" id="m_m" name="mirror" value="mirror">
+                        <input type="radio" id="m_m" name="isMirror" value=true>
                         <label for="m_m">Mirror</label>
                     </div><div class="radio">
-                        <input type="radio" id="r_d" name="reverce" value="default" checked>
+                        <input type="radio" id="r_d" name="isReverce" value=false checked>
                         <label for="r_d">Default</label>
-                        <input type="radio" id="r_r" name="reverce" value="reverce">
+                        <input type="radio" id="r_r" name="isReverce" value=true>
                         <label for="r_r">Reverce</label>
                     </div><div class="radio">
-                        <input type="radio" id="sf_sans" name="select_font" value="sansserif" checked>
+                        <input type="radio" id="sf_sans" name="isSerif" value=false checked>
                         <label for="sf_sans">Sans-serif</label>
-                        <input type="radio" id="sf_serif" name="select_font" value="serif">
+                        <input type="radio" id="sf_serif" name="isSerif" value=true>
                         <label for="sf_serif">Serif</label>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                 // resetは除く
                 if (element.type === 'radio') {
                     if (element.checked) {
-                        formValue[element.name] = element.value;
+                        formValue[element.name] = element.value === 'true';
                     }
                 } else if(element.type === 'reset') {
                     continue;
