@@ -227,7 +227,7 @@ function setup() {
 
   frameRate(30);
 
-  navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+  // navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 }
 
 function windowResized() {
