@@ -238,7 +238,6 @@ function windowResized() {
 }
 
 function draw() {
-  // canvasElementに変更があったらsetupを再実行
   const getText = document.getElementById("secret-text");
   if (mainText !== getText.value) {
     mainText = getText.value;
