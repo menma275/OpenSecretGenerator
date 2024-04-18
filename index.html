@@ -23,6 +23,7 @@
     </header>
     <main>
         <div id="input_interface">
+            <input type="text" id="title" placeholder="Title">
             <textarea rows="5" id="secret-text" placeholder="Enter your secret here"></textarea>
             <form id="interface">
                 <div id="interface-slider">
@@ -148,6 +149,7 @@
                     formValue[element.id] = Number(element.value);
                 }
             }
+            formValue['title'] = document.getElementById('title').value;
             formValue['secret-text'] = document.getElementById('secret-text').value;
 
             const json = JSON.stringify(formValue);
